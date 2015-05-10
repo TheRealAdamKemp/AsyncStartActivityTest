@@ -49,19 +49,17 @@ namespace AsyncStartActivityTest
         /// <param name="activity">The activity to search for or create the view in.</param>
         /// <param name="fragmentTag">The tag which uniquely identifies the fragment.</param>
         /// <param name="containerId">The resource ID of the parent view to use for a newly created fragment.</param>
-        /// <param name="fragment">The found or created fragment.</param>
-        /// <returns>True if the fragment was created new. False if the fragment was found by the activity's FragmentManager.</returns>
-        public static bool FindOrCreateFragment<TFragment>(Activity activity, string fragmentTag, int containerId, out TFragment fragment) where TFragment : FragmentBase, new()
+        /// <returns>The found or created fragment.</returns>
+        public static TFragment FindOrCreateFragment<TFragment>(Activity activity, string fragmentTag, int containerId) where TFragment : FragmentBase, new()
         {
-            fragment = activity.FragmentManager.FindFragmentByTag(fragmentTag) as TFragment;
+            var fragment = activity.FragmentManager.FindFragmentByTag(fragmentTag) as TFragment;
             if (fragment == null)
             {
                 fragment = new TFragment();
                 activity.FragmentManager.BeginTransaction().Add(containerId, fragment, fragmentTag).Commit();
-                return true;
             }
 
-            return false;
+            return fragment;
         }
 
         /// <inheritdoc />
