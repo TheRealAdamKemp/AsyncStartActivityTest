@@ -35,8 +35,6 @@ namespace AsyncStartActivityTest
         // It just needs to be high enough to avoid collisions with direct calls to StartActivityForResult, which typically would be 0, 1, 2...
         private const int FirstAsyncActivityRequestCode = 1000;
 
-        private const string AsyncActivityRequestCodeExtra = "AsyncActivityRequestCodeExtra";
-
         // This is static so that they are unique across all implementations of FragmentBase.
         // This is important for the fragment initializer overloads of StartActivityForResultAsync.
         private static int _nextAsyncActivityRequestCode = FirstAsyncActivityRequestCode;
