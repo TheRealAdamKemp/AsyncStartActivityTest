@@ -38,6 +38,14 @@ namespace AsyncStartActivityTest
             return view;
         }
 
+        public override void OnDestroyView()
+        {
+            base.OnDestroyView();
+
+            _button = null;
+            _textView = null;
+        }
+
         private void UpdateText()
         {
             _textView.Text = _text;

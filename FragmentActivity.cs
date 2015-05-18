@@ -1,4 +1,6 @@
-﻿using Android.App;
+﻿using System;
+using System.Threading.Tasks;
+using Android.App;
 using Android.Content;
 using Android.OS;
 
@@ -39,6 +41,15 @@ namespace AsyncStartActivityTest
             base.OnCreate(savedInstanceState);
 
             LoadFragment();
+        }
+
+        protected override async void OnDestroy()
+        {
+            base.OnDestroy();
+
+            await Task.Yield();
+
+            GC.Collect();
         }
 
         /// <inheritdoc />
